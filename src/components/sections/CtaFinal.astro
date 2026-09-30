@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/ui/Button.astro";
+import { whatsappLink } from "@/lib/content";
+import type { getHome, getSettings } from "@/lib/content";
+
+interface Props {
+  data: Awaited<ReturnType<typeof getHome>>["ctaFinal"];
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+
+const { data, settings } = Astro.props;
+const wa = whatsappLink(settings.whatsappNumber, settings.whatsappMessage);
+---
+
+<section class="cta">
+  <div class="cta-media hidden lg:block" aria-hidden="true">
+    <Image src={data.image} alt={data.imageAlt} widths={[800, 1200, 1800]} sizes="80vw" />
+  </div>
+
+  <div class="container-lp cta-inner">
+    <h2 class="t-display cta-title">{data.title}</h2>
+    <p class="t-lead cta-text">{data.text}</p>
+    <Button href={wa} variant="solid" whatsapp class="cta-btn">{data.buttonLabel}</Button>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-teal);
+    color: var(--color-linen);
+    padding: 62px 0 60px;
+  }
+
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cta-title {
+    max-width: 290px;
+  }
+
+  .cta-text {
+    margin-top: 22px;
+    max-width: 280px;
+  }
+
+  .cta-inner :global(.cta-btn) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: 64rem) {
+    .cta {
+      min-height: 495px;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+      background: linear-gradient(
+        180deg,
+        var(--color-teal-grad-from),
+        var(--color-teal-grad-to)
+      );
+    }
+
+    /* A foto já tem fundo verde; fica ancorada à direita e o degradê completa a esquerda */
+    .cta-media {
+      position: absolute;
+      top: -4.75%;
+      right: 0;
+      height: 129.5%;
+      aspect-ratio: 2752 / 1536;
+    }
+    .cta-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cta-media {
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%);
+      mask-image: linear-gradient(90deg, transparent, #000 22%);
+    }
+
+    .cta-inner {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .cta-title {
+      max-width: 800px;
+    }
+
+    .cta-text {
+      margin-top: 30px;
+      max-width: none;
+    }
+
+    .cta-inner :global(.cta-btn) {
+      margin-top: 30px;
+    }
+  }
+</style>

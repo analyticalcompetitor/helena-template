@@ -1,0 +1,119 @@
+{
+  "hero": {
+    "title": "Beleza tratada com a técnica que sua pele merece.",
+    "text": "**Estética avançada** para quem busca resultados reais, cuidado personalizado e uma experiência à altura do que você procura.",
+    "image": "/src/assets/images/hero.jpg",
+    "imageMobile": "/src/assets/images/hero-mobile.jpg",
+    "imageAlt": "Dra. Helena Vasconcelos sorrindo em seu consultório, de jaleco branco",
+    "primaryButton": "Falar no WhatsApp",
+    "secondaryButton": "Conhecer Serviços"
+  },
+  "areas": {
+    "title": "Áreas de Atuação",
+    "buttonLabel": "Agendar Avaliação",
+    "items": [
+      {
+        "icon": "spa",
+        "title": "Estética Facial",
+        "text": "Protocolos personalizados de limpeza, rejuvenescimento e harmonização para uma pele visivelmente mais saudável."
+      },
+      {
+        "icon": "person",
+        "title": "Estética Corporal",
+        "text": "Tratamentos avançados para contorno corporal, firmeza e redução de medidas, com tecnologia de ponta."
+      },
+      {
+        "icon": "syringe",
+        "title": "Procedimentos Avançados",
+        "text": "Harmonização facial e intervenções minimamente invasivas conduzidas com precisão e naturalidade."
+      }
+    ]
+  },
+  "whyChoose": {
+    "title": "Por que escolher",
+    "image": "/src/assets/images/por-que-escolher.jpg",
+    "imageAlt": "Cliente recebendo limpeza de pele com espátula ultrassônica",
+    "items": [
+      { "text": "Atendimento personalizado e individualizado" },
+      { "text": "Espaço boutique, poucas clientes, atenção total" },
+      { "text": "Tecnologia e equipamentos de última geração" },
+      { "text": "Protocolos claros, sem promessas irreais" }
+    ]
+  },
+  "about": {
+    "title": "Sobre Helena Vasconcelos",
+    "text": "Com **mais de 10 anos dedicados à estética facial e corporal,** Helena Vasconcelos construiu sua trajetória sobre um princípio simples: **cada pele é única, e cada tratamento exige um protocolo sob medida.**\n\n**Formada em Biomedicina Estética, com especializações internacionais em harmonização facial e tecnologias de última geração,** ela une conhecimento técnico a uma escuta atenta — porque por trás de cada tratamento existe uma história e um objetivo que precisam ser compreendidos antes de qualquer procedimento.",
+    "image": "/src/assets/images/sobre-helena.png",
+    "imageAlt": "Helena Vasconcelos sentada em uma poltrona verde, de jaleco branco",
+    "buttonLabel": "Agendar Avaliação"
+  },
+  "instagram": {
+    "title": "Fique por dentro",
+    "subtitle": "Antes e depois, bastidores e dicas de cuidados direto no seu feed.",
+    "name": "Helena Vasconcelos",
+    "handle": "@dra.helena_vasconcelos",
+    "posts": "88",
+    "followers": "886",
+    "following": "2.501",
+    "images": [
+      { "image": "/src/assets/images/instagram-01.jpg", "alt": "Helena Vasconcelos sentada na poltrona do consultório" },
+      { "image": "/src/assets/images/instagram-02.jpg", "alt": "Sala de procedimentos com poltrona reclinável" },
+      { "image": "/src/assets/images/instagram-03.jpg", "alt": "Antes e depois de tratamento facial" },
+      { "image": "/src/assets/images/instagram-04.jpg", "alt": "Mulher com pele iluminada em fundo verde" },
+      { "image": "/src/assets/images/instagram-05.jpg", "alt": "Cliente recebendo limpeza de pele" },
+      { "image": "/src/assets/images/instagram-06.jpg", "alt": "Helena Vasconcelos segurando uma seringa" },
+      { "image": "/src/assets/images/instagram-07.jpg", "alt": "Recepção da clínica com poltronas e quadros" },
+      { "image": "/src/assets/images/instagram-08.jpg", "alt": "Antes e depois de rejuvenescimento facial" }
+    ]
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "image": "/src/assets/images/faq.jpg",
+    "imageAlt": "Sala de procedimentos com poltrona estética bege",
+    "items": [
+      {
+        "question": "Como funciona a primeira avaliação?",
+        "answer": "A primeira consulta é dedicada a entender sua pele, seus objetivos e montar um protocolo personalizado — sem compromisso."
+      },
+      {
+        "question": "Os tratamentos têm resultado garantido?",
+        "answer": "Cada pele responde de um jeito. Na avaliação, Helena explica com clareza o que é possível alcançar no seu caso, sem promessas irreais."
+      },
+      {
+        "question": "Helena atende pessoalmente todas as clientes?",
+        "answer": "Sim. Todas as avaliações e procedimentos são conduzidos pessoalmente pela Dra. Helena."
+      },
+      {
+        "question": "Quais tratamentos são oferecidos?",
+        "answer": "Estética facial, estética corporal e procedimentos avançados, como harmonização facial e intervenções minimamente invasivas."
+      },
+      {
+        "question": "Quanto tempo leva para ter um retorno após o contato?",
+        "answer": "As mensagens enviadas pelo WhatsApp são respondidas em até um dia útil."
+      },
+      {
+        "question": "Qual é o diferencial em relação a clínicas maiores?",
+        "answer": "Um espaço boutique, com poucas clientes por dia e atenção total a cada uma, do primeiro contato ao acompanhamento."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Não encontrou sua dúvida?",
+    "text": "Clique no botão abaixo e fale diretamente com a Dra. Helena Vasconcelos",
+    "buttonLabel": "Falar com Dra. Helena"
+  },
+  "ctaFinal": {
+    "title": "Sua pele merece o cuidado certo, no momento certo.",
+    "text": "Agende sua avaliação e descubra o protocolo ideal para você.",
+    "buttonLabel": "Falar no WhatsApp",
+    "image": "/src/assets/images/cta-final.jpg",
+    "imageAlt": "Detalhe de rosto feminino com uma flor branca no ombro"
+  },
+  "footer": {
+    "addressTitle": "Conheça nosso espaço",
+    "address": "Rua Lorem Ipsum, Q. 01, L.02, Bairro Dolor Sit Amet, CEP 12345-678",
+    "mapsLabel": "Ver no Maps",
+    "socialTitle": "Redes Sociais",
+    "copyright": "© 2026 LP Express. Todos os direitos reservados."
+  }
+}

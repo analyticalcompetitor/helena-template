@@ -1,0 +1,185 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/ui/Button.astro";
+import Icon from "@/components/icons/Icon.astro";
+import type { IconName } from "@/components/icons/icons";
+import type { getHome, getSettings } from "@/lib/content";
+
+interface Props {
+  data: Awaited<ReturnType<typeof getHome>>["footer"];
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+
+const { data, settings } = Astro.props;
+
+const socials = [
+  { name: "instagram", label: "Instagram", href: settings.instagramUrl },
+  { name: "tiktok", label: "TikTok", href: settings.tiktokUrl },
+  { name: "linkedin", label: "LinkedIn", href: settings.linkedinUrl },
+].filter((s) => s.href) as { name: IconName; label: string; href: string }[];
+---
+
+<footer class="footer">
+  <div class="container-lp footer-inner">
+    <div class="footer-logo">
+      <Image src={settings.footerLogo} alt={settings.siteTitle} />
+    </div>
+
+    <div class="footer-address">
+      <p class="footer-heading">{data.addressTitle}</p>
+      <p class="footer-address-text">{data.address}</p>
+      {
+        settings.mapsUrl && (
+          <Button href={settings.mapsUrl} variant="mini" external class="footer-maps">
+            {data.mapsLabel}
+          </Button>
+        )
+      }
+    </div>
+
+    {
+      socials.length > 0 && (
+        <div class="footer-social">
+          <p class="footer-heading">{data.socialTitle}</p>
+          <ul>
+            {socials.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                  <Icon name={s.name} size={14} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="footer-bar">
+    <p>{data.copyright}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--color-sage);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 0 56px;
+  }
+
+  .footer-logo img {
+    width: 224px;
+    height: auto;
+  }
+
+  .footer-heading {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--color-teal);
+  }
+
+  .footer-address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 42px;
+  }
+
+  .footer-address-text {
+    margin-top: 12px;
+    max-width: 290px;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--color-taupe);
+  }
+
+  .footer-address :global(.footer-maps) {
+    margin-top: 16px;
+  }
+
+  .footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 44px;
+  }
+
+  .footer-social ul {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-social a {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-teal);
+    color: var(--color-mist);
+    box-shadow: var(--shadow-photo);
+    transition: background-color 300ms ease-out;
+  }
+  .footer-social a:hover {
+    background: var(--color-teal-deep);
+  }
+
+  .footer-bar {
+    background: var(--color-mist);
+    padding: 12px 20px;
+    text-align: center;
+  }
+  .footer-bar p {
+    font-family: var(--font-raleway);
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--color-teal);
+  }
+
+  @media (min-width: 64rem) {
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      padding: 53px 0 46px;
+    }
+
+    .footer-logo {
+      justify-self: start;
+    }
+
+    .footer-address {
+      margin-top: 0;
+    }
+
+    .footer-heading {
+      font-size: 18px;
+    }
+
+    .footer-address-text {
+      margin-top: 8px;
+      max-width: 340px;
+    }
+
+    .footer-social {
+      justify-self: end;
+      align-items: flex-end;
+      margin-top: 4px;
+    }
+
+    .footer-social ul {
+      margin-top: 11px;
+    }
+  }
+</style>

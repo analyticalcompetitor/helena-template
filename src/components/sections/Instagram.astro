@@ -1,0 +1,312 @@
+---
+import { Image } from "astro:assets";
+import Ornament from "@/components/ui/Ornament.astro";
+import seguir from "@/assets/brand/instagram-seguir.svg?raw";
+import type { getHome, getSettings } from "@/lib/content";
+
+interface Props {
+  data: Awaited<ReturnType<typeof getHome>>["instagram"];
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+
+const { data, settings } = Astro.props;
+const profileUrl = settings.instagramUrl ?? "#";
+const stats = [
+  { value: data.posts, label: "posts" },
+  { value: data.followers, label: "seguidores" },
+  { value: data.following, label: "seguindo" },
+].filter((s) => s.value);
+---
+
+<section class="insta" id="instagram">
+  <Ornament name="mInsta" class="orn-m-insta lg:hidden" />
+  <Ornament name="dInsta" class="orn-d-insta hidden lg:block" />
+
+  <div class="container-lp insta-inner">
+    <h2 class="t-section insta-title">{data.title}</h2>
+    <p class="t-lead insta-subtitle">{data.subtitle}</p>
+
+    <div class="profile">
+      <a class="avatar" href={profileUrl} target="_blank" rel="noopener noreferrer" aria-label={`Instagram de ${data.name}`}>
+        {data.avatar && <Image src={data.avatar} alt="" width={152} height={152} />}
+      </a>
+      <div class="profile-id">
+        <p class="profile-name">{data.name}</p>
+        <p class="profile-handle">{data.handle}</p>
+      </div>
+      <ul class="profile-stats">
+        {
+          stats.map((s) => (
+            <li>
+              <strong>{s.value}</strong>
+              <span>{s.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="follow follow-desktop" href={profileUrl} target="_blank" rel="noopener noreferrer" aria-label="Seguir no Instagram">
+        <span set:html={seguir} />
+      </a>
+    </div>
+
+    <ul class="feed">
+      {
+        data.images.map((item, i) => (
+          <li class:list={["feed-item", { "feed-desktop-only": i >= 6 }]}>
+            <a href={profileUrl} target="_blank" rel="noopener noreferrer">
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[240, 400, 640]}
+                sizes="(min-width: 64rem) 303px, 33vw"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a class="follow follow-mobile" href={profileUrl} target="_blank" rel="noopener noreferrer" aria-label="Seguir no Instagram">
+      <span set:html={seguir} />
+    </a>
+  </div>
+</section>
+
+<style>
+  .insta {
+    position: relative;
+    background: #fff;
+    padding: 70px 0 51px;
+  }
+
+  .insta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .insta-title {
+    color: var(--color-teal);
+  }
+
+  .insta-subtitle {
+    margin-top: 14px;
+    max-width: 290px;
+  }
+
+  /* Cabeçalho estilo perfil do Instagram (Open Sans, como no Figma) */
+  .profile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "avatar id"
+      "avatar stats";
+    column-gap: 18px;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 40px;
+    font-family: var(--font-open-sans);
+    text-align: left;
+  }
+
+  .avatar {
+    grid-area: avatar;
+    display: block;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--color-teal);
+    overflow: hidden;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-id {
+    grid-area: id;
+    align-self: end;
+  }
+
+  .profile-name {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.2;
+    color: var(--color-graphite);
+  }
+
+  .profile-handle {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-silver);
+  }
+
+  .profile-stats {
+    grid-area: stats;
+    align-self: start;
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    list-style: none;
+    padding: 0;
+  }
+  .profile-stats li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-stats strong {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.1;
+    color: var(--color-graphite);
+  }
+  .profile-stats span {
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--color-silver);
+  }
+
+  .follow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-instagram);
+    border-radius: 4px;
+    transition: filter 300ms ease-out;
+  }
+  .follow:hover {
+    filter: brightness(1.08);
+  }
+  .follow > span {
+    display: block;
+    height: 100%;
+  }
+  .follow :global(svg) {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
+  .follow-desktop {
+    display: none;
+  }
+
+  .follow-mobile {
+    width: 110px;
+    height: 35px;
+    padding: 9px 0;
+    margin-top: 20px;
+  }
+
+  .feed {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8px;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 28px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .feed-item a {
+    display: block;
+    aspect-ratio: 303 / 379;
+    overflow: hidden;
+  }
+  .feed-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease-out;
+  }
+  .feed-item a:hover img {
+    transform: scale(1.04);
+  }
+
+  .feed-desktop-only {
+    display: none;
+  }
+
+  :global(.orn-m-insta) {
+    bottom: -62px;
+    left: -549px;
+    width: 802px;
+    height: 441px;
+  }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 64rem) {
+    .insta {
+      padding: 91px 0 100px;
+    }
+
+    .insta-subtitle {
+      margin-top: 18px;
+      max-width: none;
+    }
+
+    .profile {
+      grid-template-columns: auto auto 1fr auto;
+      grid-template-areas: "avatar id stats follow";
+      column-gap: 19px;
+      max-width: 918px;
+      margin-top: 55px;
+    }
+
+    .profile-id {
+      align-self: center;
+    }
+
+    .profile-name,
+    .profile-stats strong {
+      font-size: 26px;
+    }
+
+    .profile-handle,
+    .profile-stats span {
+      font-size: 20px;
+    }
+
+    .profile-stats {
+      align-self: center;
+      justify-self: end;
+      gap: 14px;
+      margin: 0 45px 0 0;
+    }
+
+    .follow-desktop {
+      grid-area: follow;
+      display: inline-flex;
+      width: 156px;
+      height: 51px;
+      padding: 12px 0;
+    }
+
+    .follow-mobile {
+      display: none;
+    }
+
+    .feed {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px 4.85px;
+      max-width: 1226px;
+      margin-top: 50px;
+    }
+
+    .feed-desktop-only {
+      display: block;
+    }
+
+    :global(.orn-d-insta) {
+      bottom: -80px;
+      left: -641px;
+      width: 1073px;
+      height: 590px;
+    }
+  }
+</style>

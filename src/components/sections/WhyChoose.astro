@@ -1,0 +1,176 @@
+---
+import { Image } from "astro:assets";
+import type { getHome } from "@/lib/content";
+
+interface Props {
+  data: Awaited<ReturnType<typeof getHome>>["whyChoose"];
+}
+
+const { data } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+
+<section class="why">
+  <div class="why-media">
+    <Image
+      src={data.image}
+      alt={data.imageAlt}
+      widths={[480, 720, 1080, 1440]}
+      sizes="(min-width: 64rem) 50vw, 100vw"
+    />
+  </div>
+
+  <div class="why-panel">
+    <div class="why-card">
+      <h2 class="t-section why-title">{data.title}</h2>
+      <ol class="why-list">
+        {
+          data.items.map((item, i) => (
+            <li class="why-item">
+              <span class="why-num">{pad(i + 1)}</span>
+              <span class="why-text">{item.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    position: relative;
+  }
+
+  /* ---------- Mobile: foto + card sobreposto ---------- */
+  .why-media {
+    position: relative;
+    height: 638px;
+    overflow: hidden;
+  }
+  .why-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 100%;
+    transform: scale(1.16);
+    transform-origin: 50% 100%;
+  }
+
+  .why-panel {
+    position: relative;
+    z-index: 2;
+    background: var(--color-sage);
+    padding: 0 20px;
+  }
+
+  .why-card {
+    position: relative;
+    top: -124px;
+    margin: 0 auto -124px;
+    max-width: 420px;
+    padding: 38px 27px 42px;
+    background: var(--color-teal);
+    border-radius: 20px;
+    box-shadow: var(--shadow-photo);
+    text-align: center;
+  }
+
+  .why-title {
+    color: var(--color-sage);
+  }
+
+  .why-list {
+    margin-top: 6px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .why-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 12px 0 11px;
+    border-bottom: 1px solid var(--color-sage);
+  }
+
+  .why-num {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    line-height: 1;
+    color: var(--color-sage);
+  }
+
+  .why-text {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-sand);
+  }
+
+  /* ---------- Desktop: 50/50 ---------- */
+  @media (min-width: 64rem) {
+    .why {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 638px;
+    }
+
+    .why-media {
+      height: auto;
+    }
+    .why-media img {
+      transform: none;
+    }
+
+    .why-panel {
+      display: flex;
+      align-items: center;
+      background: var(--color-teal);
+      padding: 70px 60px 70px 100px;
+      padding-left: clamp(40px, 6.95vw, 100px);
+      padding-right: clamp(40px, 4.17vw, 60px);
+    }
+
+    .why-card {
+      top: 0;
+      margin: 0;
+      max-width: 560px;
+      width: 100%;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
+      text-align: left;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 21px;
+      margin-top: 34px;
+    }
+
+    .why-item {
+      flex-direction: row;
+      gap: 18px;
+      min-height: 89px;
+      padding: 0 20px 0 11px;
+      border: 1px solid var(--color-sand);
+      border-radius: 20px;
+    }
+
+    .why-num {
+      font-size: 80px;
+      width: 72px;
+      flex: none;
+      padding-top: 6px;
+    }
+
+    .why-text {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+</style>

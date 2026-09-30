@@ -1,0 +1,167 @@
+@import "@fontsource/libertinus-math/400.css";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/700.css";
+@import "@fontsource/raleway/400.css";
+@import "tailwindcss";
+
+/*
+ * Tokens extraídos do Figma (LP Express - Estética).
+ * Os nomes das cores seguem o papel no layout, não o tom.
+ */
+@theme {
+  --color-teal: #528e8a; /* cor principal: fundos, títulos e botões */
+  --color-teal-deep: #3a8378; /* logo do rodapé */
+  --color-teal-grad-from: #37887f; /* gradiente do CTA final */
+  --color-teal-grad-to: #367e75;
+  --color-sage: #cdd9c6; /* faixas verdes claras, números */
+  --color-cream: #fffefa; /* fundo de Áreas de Atuação */
+  --color-mist: #eaebe5; /* cards, FAQ, botão sólido, texto claro */
+  --color-sand: #ece9e4; /* texto e bordas em fundo verde */
+  --color-linen: #e9e2d3; /* texto do CTA final */
+  --color-taupe: #786c66; /* texto corrido */
+  --color-graphite: #4c4c4c; /* títulos em fundo claro */
+  --color-silver: #adadad; /* legendas do bloco do Instagram */
+  --color-instagram: #0195f6;
+
+  --font-serif: "Libertinus Math", "Libertinus Serif", Georgia, serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-open-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-raleway: "Raleway", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 4px 20px rgb(0 0 0 / 0.1);
+  --shadow-soft: 0 4px 20px rgb(0 0 0 / 0.15);
+  --shadow-photo: 0 4px 20px rgb(0 0 0 / 0.2);
+  --shadow-button: 0 4px 20px rgb(0 0 0 / 0.25);
+
+  --breakpoint-lg: 64rem;
+}
+
+@layer base {
+  html {
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-taupe);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-lp {
+    width: min(100% - 40px, 1320px);
+    margin-inline: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 64rem) {
+    .container-lp {
+      width: min(100% - 80px, 1320px);
+    }
+  }
+
+  /* Títulos */
+  .t-display {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .t-section {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .t-card {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .t-lead {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .t-body {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @media (min-width: 64rem) {
+    .t-display {
+      font-size: clamp(48px, 4.861vw, 70px);
+    }
+
+    .t-section {
+      font-size: 40px;
+      line-height: 1.15;
+    }
+
+    .t-card {
+      font-size: 30px;
+    }
+
+    .t-lead {
+      font-size: 24px;
+      line-height: 34px;
+    }
+
+    .t-body {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  /* Texto vindo do CMS em Markdown (negrito e parágrafos) */
+  .rich strong {
+    font-weight: 700;
+  }
+
+  .rich p + p {
+    margin-top: 13px;
+  }
+
+  @media (min-width: 64rem) {
+    .rich p + p {
+      margin-top: 15px;
+    }
+  }
+
+  /* Ornamentos: ficam acima dos fundos das seções e abaixo do conteúdo */
+  .ornament {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    color: var(--color-sage);
+  }
+
+  .ornament svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}

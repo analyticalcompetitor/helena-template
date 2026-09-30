@@ -1,0 +1,20 @@
+---
+import dHero from "@/assets/decor/orn-d-hero.svg?raw";
+import dInsta from "@/assets/decor/orn-d-insta.svg?raw";
+import dFaq from "@/assets/decor/orn-d-faq.svg?raw";
+import mHero from "@/assets/decor/orn-m-hero.svg?raw";
+import mInsta from "@/assets/decor/orn-m-insta.svg?raw";
+import mFaq from "@/assets/decor/orn-m-faq.svg?raw";
+
+// Arabescos decorativos do layout, na posição exata do Figma.
+const svgs = { dHero, dInsta, dFaq, mHero, mInsta, mFaq };
+
+interface Props {
+  name: keyof typeof svgs;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<div class:list={["ornament", className]} aria-hidden="true" set:html={svgs[name]} />

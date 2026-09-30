@@ -1,0 +1,24 @@
+---
+import "@/styles/global.css";
+
+import BaseHead from "@/components/seo/BaseHead.astro";
+import type { Props as BaseHeadProps } from "@/components/seo/BaseHead.astro";
+
+export interface Props extends BaseHeadProps {}
+
+const headProps = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <BaseHead {...headProps} />
+    <slot name="head" />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

@@ -1,0 +1,163 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+
+/*
+ * Variantes do Figma:
+ * - solid:    fundo mist, texto verde (hero e CTA final)
+ * - light:    contorno claro sobre fundo verde (Conhecer Serviços)
+ * - teal:     contorno verde, menor (cards de Áreas de Atuação)
+ * - dark:     contorno grafite (Sobre e Não encontrou)
+ * - mini:     contorno grafite, sem ícone (Ver no Maps)
+ */
+type Variant = "solid" | "light" | "teal" | "dark" | "mini";
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  whatsapp?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "solid",
+  whatsapp = false,
+  external = false,
+  class: className,
+} = Astro.props;
+
+const isExternal = external || whatsapp;
+---
+
+<a
+  href={href}
+  class:list={["btn", `btn-${variant}`, className]}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
+>
+  {whatsapp && <Icon name="whatsapp" size={20} />}
+  <span><slot /></span>
+</a>
+
+<style>
+  /*
+   * Hover do Figma (Variant2): While hovering → Smart animate, ease-out, 300ms.
+   * A nova cor entra como um círculo que nasce no centro da borda de baixo
+   * e se expande até cobrir o botão.
+   * Cada variante define: --btn-fill (cor do círculo) e --btn-hover-fg (texto/ícone no hover).
+   */
+  .btn {
+    --btn-ease: cubic-bezier(0, 0, 0.58, 1); /* ease-out */
+    --btn-dur: 300ms;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 54px;
+    padding-inline: 20px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    /* Contornados: no Figma a sombra é do traço e do texto, não de uma caixa preenchida */
+    filter: drop-shadow(0 4px 10px rgb(0 0 0 / 0.25));
+    transition:
+      color var(--btn-dur) var(--btn-ease),
+      border-color var(--btn-dur) var(--btn-ease);
+  }
+
+  .btn::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    bottom: 0;
+    /* Diâmetro suficiente para cobrir os cantos a partir do centro da base */
+    width: calc(100% + 120px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--btn-fill);
+    transform: translate(-50%, 50%) scale(0);
+    transition: transform var(--btn-dur) var(--btn-ease);
+    pointer-events: none;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    color: var(--btn-hover-fg);
+    border-color: var(--btn-hover-border, var(--btn-fill));
+  }
+
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    transform: translate(-50%, 50%) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn::before {
+      transition-duration: 0.01ms;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .btn {
+      font-size: 18px;
+    }
+  }
+
+  /* Variant2 do Figma: círculo #CDD9C6, texto e ícone #4C4C4C (hero e CTA final) */
+  .btn-solid {
+    --btn-fill: var(--color-sage);
+    --btn-hover-fg: var(--color-graphite);
+    --btn-hover-border: var(--color-sage);
+    background: var(--color-mist);
+    border-color: var(--color-mist);
+    color: var(--color-teal);
+    filter: none;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-light {
+    --btn-fill: var(--color-mist);
+    --btn-hover-fg: var(--color-teal);
+    border-color: var(--color-mist);
+    color: var(--color-mist);
+  }
+
+  .btn-teal {
+    --btn-fill: var(--color-teal);
+    --btn-hover-fg: var(--color-mist);
+    height: 44px;
+    padding-inline: 10px 12px;
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+    font-size: 16px !important;
+  }
+
+  .btn-dark {
+    --btn-fill: var(--color-graphite);
+    --btn-hover-fg: var(--color-sage);
+    border-color: var(--color-graphite);
+    color: var(--color-graphite);
+  }
+
+  .btn-mini {
+    --btn-fill: var(--color-graphite);
+    --btn-hover-fg: var(--color-sage);
+    height: 38px;
+    padding-inline: 10px;
+    border-color: var(--color-graphite);
+    color: var(--color-graphite);
+    font-size: 14px !important;
+  }
+</style>

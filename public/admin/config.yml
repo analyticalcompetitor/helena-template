@@ -1,0 +1,202 @@
+backend:
+  name: github
+  # Troque pelo owner/repositório real. Ex.: poty-tech/helena-vasconcelos
+  repo: "<usuario-ou-org>/<repositorio>"
+  # Branch que dispara o deploy. Ex.: main
+  branch: "<branch>"
+
+# URL pública do site. Ex.: https://helenavasconcelos.com.br
+site_url: "<url-do-site>"
+
+# Imagens enviadas pelo painel ficam em src/assets/images e são otimizadas pelo Astro no build.
+media_folder: /src/assets/images
+public_folder: /src/assets/images
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: paginas
+    label: Site
+    editor:
+      preview: false
+    files:
+      # ─────────────────────────────── PÁGINA INICIAL ───────────────────────────────
+      - name: home
+        label: Página inicial
+        file: src/content/data/home.json
+        format: json
+        fields:
+          - label: Topo (hero)
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: text }
+              - label: Texto de apoio
+                name: text
+                widget: markdown
+                hint: "Use negrito para destacar palavras, como no layout."
+                buttons: [bold, italic]
+                editor_components: []
+                modes: [rich_text]
+              - { label: Foto, name: image, widget: image, hint: "Retrato vertical. A foto é recortada em arco no desktop." }
+              - { label: Foto do topo no celular, name: imageMobile, widget: image, required: false, hint: "Vertical (360x800 ou maior). Deixe espaço no alto para a logo. Sem ela, usa a foto acima." }
+              - { label: Descrição da foto (acessibilidade), name: imageAlt, widget: string }
+              - { label: Botão do WhatsApp, name: primaryButton, widget: string }
+              - { label: Botão secundário, name: secondaryButton, widget: string }
+
+          - label: Áreas de Atuação
+            name: areas
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título da seção, name: title, widget: string }
+              - { label: Texto dos botões, name: buttonLabel, widget: string }
+              - label: Cards
+                name: items
+                widget: list
+                summary: "{{fields.title}}"
+                min: 1
+                max: 6
+                fields:
+                  - label: Ícone
+                    name: icon
+                    widget: select
+                    default: spa
+                    options:
+                      - { label: "Flor (facial)", value: spa }
+                      - { label: "Pessoa (corporal)", value: person }
+                      - { label: "Seringa (procedimentos)", value: syringe }
+                  - { label: Título, name: title, widget: string }
+                  - { label: Texto, name: text, widget: text }
+
+          - label: Por que escolher
+            name: whyChoose
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título da seção, name: title, widget: string }
+              - { label: Foto, name: image, widget: image }
+              - { label: Descrição da foto (acessibilidade), name: imageAlt, widget: string }
+              - label: Diferenciais
+                name: items
+                widget: list
+                hint: "A numeração (01, 02...) é automática."
+                summary: "{{fields.text}}"
+                min: 1
+                max: 6
+                fields:
+                  - { label: Texto, name: text, widget: string }
+
+          - label: Sobre
+            name: about
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: string }
+              - label: Texto
+                name: text
+                widget: markdown
+                hint: "Separe parágrafos com uma linha em branco. Use negrito para os destaques."
+                buttons: [bold, italic]
+                editor_components: []
+                modes: [rich_text]
+              - { label: Foto, name: image, widget: image, hint: "PNG com fundo transparente fica melhor, como no layout." }
+              - { label: Descrição da foto (acessibilidade), name: imageAlt, widget: string }
+              - { label: Texto do botão, name: buttonLabel, widget: string }
+
+          - label: Instagram
+            name: instagram
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Subtítulo, name: subtitle, widget: string }
+              - { label: Nome no perfil, name: name, widget: string }
+              - { label: Usuário (@), name: handle, widget: string }
+              - { label: Foto do perfil, name: avatar, widget: image, required: false, hint: "Opcional. Sem foto, aparece um círculo verde." }
+              - { label: Publicações, name: posts, widget: string, required: false }
+              - { label: Seguidores, name: followers, widget: string, required: false }
+              - { label: Seguindo, name: following, widget: string, required: false }
+              - label: Fotos do feed
+                name: images
+                widget: list
+                hint: "8 fotos. No celular aparecem as 6 primeiras."
+                summary: "{{fields.alt}}"
+                min: 8
+                max: 8
+                fields:
+                  - { label: Foto, name: image, widget: image }
+                  - { label: Descrição (acessibilidade), name: alt, widget: string }
+
+          - label: Perguntas Frequentes
+            name: faq
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Foto (só no desktop), name: image, widget: image }
+              - { label: Descrição da foto (acessibilidade), name: imageAlt, widget: string }
+              - label: Perguntas
+                name: items
+                widget: list
+                hint: "A primeira pergunta aparece aberta."
+                summary: "{{fields.question}}"
+                fields:
+                  - { label: Pergunta, name: question, widget: string }
+                  - { label: Resposta, name: answer, widget: text }
+
+          - label: Não encontrou sua dúvida
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Texto, name: text, widget: text }
+              - { label: Texto do botão, name: buttonLabel, widget: string }
+
+          - label: Chamada final
+            name: ctaFinal
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título, name: title, widget: text }
+              - { label: Texto, name: text, widget: string }
+              - { label: Texto do botão, name: buttonLabel, widget: string }
+              - { label: Foto de fundo (só no desktop), name: image, widget: image, hint: "Horizontal, com o assunto à direita e fundo verde à esquerda." }
+              - { label: Descrição da foto (acessibilidade), name: imageAlt, widget: string }
+
+          - label: Rodapé
+            name: footer
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título do endereço, name: addressTitle, widget: string }
+              - { label: Endereço, name: address, widget: text }
+              - { label: Texto do botão do mapa, name: mapsLabel, widget: string }
+              - { label: Título das redes, name: socialTitle, widget: string }
+              - { label: Direitos autorais, name: copyright, widget: string }
+
+      # ─────────────────────────────── CONFIGURAÇÕES ───────────────────────────────
+      - name: settings
+        label: Configurações e contatos
+        file: src/content/data/settings.json
+        format: json
+        fields:
+          - { label: Título do site (Google e aba do navegador), name: siteTitle, widget: string }
+          - { label: Descrição do site (Google), name: siteDescription, widget: text }
+          - { label: Logo do topo (versão clara), name: logo, widget: image, hint: "SVG ou PNG transparente, em cor clara." }
+          - { label: Logo do rodapé, name: footerLogo, widget: image }
+          - label: WhatsApp (só números, com DDI e DDD)
+            name: whatsappNumber
+            widget: string
+            hint: "Ex.: 5586999999999"
+            pattern: ['^\d{12,13}$', "Use só números: 55 + DDD + número."]
+          - { label: Mensagem inicial do WhatsApp, name: whatsappMessage, widget: string, required: false }
+          - { label: Link do Instagram, name: instagramUrl, widget: string, required: false }
+          - { label: Link do TikTok, name: tiktokUrl, widget: string, required: false }
+          - { label: Link do LinkedIn, name: linkedinUrl, widget: string, required: false }
+          - { label: Link do Google Maps, name: mapsUrl, widget: string, required: false }

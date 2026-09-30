@@ -1,0 +1,162 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/ui/Button.astro";
+import { md, whatsappLink } from "@/lib/content";
+import type { getHome, getSettings } from "@/lib/content";
+
+interface Props {
+  data: Awaited<ReturnType<typeof getHome>>["about"];
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+
+const { data, settings } = Astro.props;
+const wa = whatsappLink(settings.whatsappNumber, settings.whatsappMessage);
+---
+
+<section class="about" id="sobre">
+  <div class="container-lp about-inner">
+    <div class="about-photo">
+      <Image
+        src={data.image}
+        alt={data.imageAlt}
+        widths={[540, 800, 1100]}
+        sizes="(min-width: 64rem) 662px, 532px"
+      />
+    </div>
+    <div class="about-glow" aria-hidden="true"></div>
+
+    <div class="about-copy">
+      <h2 class="t-section about-title">{data.title}</h2>
+      <div class="t-body about-text rich" set:html={md(data.text)} />
+      <Button href={wa} variant="dark" whatsapp class="about-btn">{data.buttonLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    background: var(--color-sage);
+    padding: 38px 0 61px;
+  }
+
+  .about-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Mobile ---------- */
+  .about-photo {
+    position: relative;
+    width: 532px;
+    max-width: none;
+    height: 460px;
+    overflow: hidden;
+  }
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  .about-glow {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 280px;
+    width: 735px;
+    height: 323px;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: var(--color-sage);
+    filter: blur(83px);
+    pointer-events: none;
+  }
+
+  .about-copy {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -104px;
+  }
+
+  .about-title {
+    color: var(--color-graphite);
+    max-width: 260px;
+  }
+
+  .about-text {
+    margin-top: 20px;
+    max-width: 320px;
+  }
+
+  .about-copy :global(.about-btn) {
+    margin-top: 32px;
+  }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 64rem) {
+    .about {
+      padding: 0;
+      min-height: 600px;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      text-align: left;
+      min-height: 600px;
+    }
+
+    .about-photo {
+      position: absolute;
+      left: -24px;
+      bottom: 0;
+      width: min(662px, 50%);
+      height: auto;
+      aspect-ratio: 662 / 635;
+      overflow: visible;
+    }
+    .about-photo img {
+      object-position: 50% 0;
+    }
+
+    .about-glow {
+      left: auto;
+      right: auto;
+      top: auto;
+      translate: none;
+      width: 389px;
+      height: 389px;
+      left: calc(50% - 188px);
+      bottom: -50px;
+      filter: blur(89px);
+    }
+
+    .about-copy {
+      grid-column: 2;
+      align-items: flex-start;
+      margin: 0;
+      padding: 60px 0 72px;
+    }
+
+    .about-title {
+      max-width: none;
+    }
+
+    .about-text {
+      margin-top: 22px;
+      max-width: 530px;
+    }
+
+    .about-copy :global(.about-btn) {
+      margin-top: 32px;
+    }
+  }
+</style>

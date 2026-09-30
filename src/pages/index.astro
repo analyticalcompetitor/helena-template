@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Areas from "@/components/sections/Areas.astro";
+import WhyChoose from "@/components/sections/WhyChoose.astro";
+import About from "@/components/sections/About.astro";
+import Instagram from "@/components/sections/Instagram.astro";
+import Faq from "@/components/sections/Faq.astro";
+import Contact from "@/components/sections/Contact.astro";
+import CtaFinal from "@/components/sections/CtaFinal.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { getHome, getSettings } from "@/lib/content";
+
+const home = await getHome();
+const settings = await getSettings();
+
+const faqSchema = {
+  "@type": "FAQPage",
+  mainEntity: home.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title={settings.siteTitle}
+  description={settings.siteDescription}
+  structuredData={faqSchema}
+>
+  <Hero data={home.hero} settings={settings} />
+  <Areas data={home.areas} settings={settings} />
+  <WhyChoose data={home.whyChoose} />
+  <About data={home.about} settings={settings} />
+  <Instagram data={home.instagram} settings={settings} />
+  <Faq data={home.faq} />
+  <Contact data={home.contact} settings={settings} />
+  <CtaFinal data={home.ctaFinal} settings={settings} />
+  <Footer slot="footer" data={home.footer} settings={settings} />
+</Layout>
