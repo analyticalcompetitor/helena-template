@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   // Troque pela URL pública do site antes do deploy.
-  site: "https://seu-dominio.com",
+  site: "https://helena-template.pages.dev",
   integrations: [sitemap({ filter: (page) => !page.includes("/admin") })],
   output: "static",
   prefetch: {

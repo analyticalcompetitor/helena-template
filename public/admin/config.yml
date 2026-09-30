@@ -1,12 +1,12 @@
 backend:
   name: github
   # Troque pelo owner/repositório real. Ex.: poty-tech/helena-vasconcelos
-  repo: "<usuario-ou-org>/<repositorio>"
+  repo: "analyticalcompetitor/helena-template"
   # Branch que dispara o deploy. Ex.: main
-  branch: "<branch>"
+  branch: "main"
 
 # URL pública do site. Ex.: https://helenavasconcelos.com.br
-site_url: "<url-do-site>"
+site_url: "https://helena-template.pages.dev"
 
 # Imagens enviadas pelo painel ficam em src/assets/images e são otimizadas pelo Astro no build.
 media_folder: /src/assets/images
