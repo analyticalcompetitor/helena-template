@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "Beleza tratada com a técnica que sua pele merece.",
+    "title": "Beleza tratada com a técnica que sua pele merece",
     "text": "**Estética avançada** para quem busca resultados reais, cuidado personalizado e uma experiência à altura do que você procura.",
     "image": "/src/assets/images/hero.jpg",
     "imageMobile": "/src/assets/images/hero-mobile.jpg",
@@ -34,10 +34,18 @@
     "image": "/src/assets/images/por-que-escolher.jpg",
     "imageAlt": "Cliente recebendo limpeza de pele com espátula ultrassônica",
     "items": [
-      { "text": "Atendimento personalizado e individualizado" },
-      { "text": "Espaço boutique, poucas clientes, atenção total" },
-      { "text": "Tecnologia e equipamentos de última geração" },
-      { "text": "Protocolos claros, sem promessas irreais" }
+      {
+        "text": "Atendimento personalizado e individualizado"
+      },
+      {
+        "text": "Espaço boutique, poucas clientes, atenção total"
+      },
+      {
+        "text": "Tecnologia e equipamentos de última geração"
+      },
+      {
+        "text": "Protocolos claros, sem promessas irreais"
+      }
     ]
   },
   "about": {
@@ -52,18 +60,43 @@
     "subtitle": "Antes e depois, bastidores e dicas de cuidados direto no seu feed.",
     "name": "Helena Vasconcelos",
     "handle": "@dra.helena_vasconcelos",
+    "avatar": "",
     "posts": "88",
     "followers": "886",
     "following": "2.501",
     "images": [
-      { "image": "/src/assets/images/instagram-01.jpg", "alt": "Helena Vasconcelos sentada na poltrona do consultório" },
-      { "image": "/src/assets/images/instagram-02.jpg", "alt": "Sala de procedimentos com poltrona reclinável" },
-      { "image": "/src/assets/images/instagram-03.jpg", "alt": "Antes e depois de tratamento facial" },
-      { "image": "/src/assets/images/instagram-04.jpg", "alt": "Mulher com pele iluminada em fundo verde" },
-      { "image": "/src/assets/images/instagram-05.jpg", "alt": "Cliente recebendo limpeza de pele" },
-      { "image": "/src/assets/images/instagram-06.jpg", "alt": "Helena Vasconcelos segurando uma seringa" },
-      { "image": "/src/assets/images/instagram-07.jpg", "alt": "Recepção da clínica com poltronas e quadros" },
-      { "image": "/src/assets/images/instagram-08.jpg", "alt": "Antes e depois de rejuvenescimento facial" }
+      {
+        "image": "/src/assets/images/instagram-01.jpg",
+        "alt": "Helena Vasconcelos sentada na poltrona do consultório"
+      },
+      {
+        "image": "/src/assets/images/instagram-02.jpg",
+        "alt": "Sala de procedimentos com poltrona reclinável"
+      },
+      {
+        "image": "/src/assets/images/instagram-03.jpg",
+        "alt": "Antes e depois de tratamento facial"
+      },
+      {
+        "image": "/src/assets/images/instagram-04.jpg",
+        "alt": "Mulher com pele iluminada em fundo verde"
+      },
+      {
+        "image": "/src/assets/images/instagram-05.jpg",
+        "alt": "Cliente recebendo limpeza de pele"
+      },
+      {
+        "image": "/src/assets/images/instagram-06.jpg",
+        "alt": "Helena Vasconcelos segurando uma seringa"
+      },
+      {
+        "image": "/src/assets/images/instagram-07.jpg",
+        "alt": "Recepção da clínica com poltronas e quadros"
+      },
+      {
+        "image": "/src/assets/images/instagram-08.jpg",
+        "alt": "Antes e depois de rejuvenescimento facial"
+      }
     ]
   },
   "faq": {
