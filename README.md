@@ -26,19 +26,6 @@ npm run build
 | `src/styles/global.css` | Tokens de cor, fontes e tipografia |
 | `public/admin/config.yml` | Configuração do Sveltia CMS |
 
-## Tokens do Figma
-
-Cores: `#528E8A` teal, `#3A8378` teal-deep, `#CDD9C6` sage, `#FFFEFA` cream, `#EAEBE5` mist,
-`#ECE9E4` sand, `#E9E2D3` linen, `#786C66` taupe (texto), `#4C4C4C` graphite (títulos), `#ADADAD` silver, `#0195F6` instagram.
-
-Fontes (self-hosted via Fontsource, sem depender do Google Fonts no build):
-
-- **Libertinus Math**: títulos (70/40/30px desktop; 36/26px mobile)
-- **Montserrat** 400/500/700: textos e botões
-- **Open Sans** 400/700: bloco de perfil do Instagram
-- **Raleway** 400: linha de copyright
-
-Breakpoint único em 1024px: abaixo segue o layout mobile (360px), acima o desktop (1440px).
 
 ## Configurar o CMS
 
